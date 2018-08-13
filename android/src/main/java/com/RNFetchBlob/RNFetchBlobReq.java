@@ -589,7 +589,11 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
         info.putBoolean("timeout", timeout);
         WritableMap headers = Arguments.createMap();
         for(int i =0;i< resp.headers().size();i++) {
-            headers.putString(resp.headers().name(i), resp.headers().value(i));
+            if(headers.hasKey(resp.headers().name(i))){
+                headers.putString(resp.headers().name(i),headers.getString(resp.headers().name(i))+"|"+resp.headers().value(i));
+            }else{
+                headers.putString(resp.headers().name(i), resp.headers().value(i));
+            }
         }
         WritableArray redirectList = Arguments.createArray();
         for(String r : redirects) {
