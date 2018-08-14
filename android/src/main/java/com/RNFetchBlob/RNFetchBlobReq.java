@@ -607,7 +607,7 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
             headers.pushString(resp.headers().value(i));
         }
         WritableArray redirectList = Arguments.createArray();
-        WritableArray redirectList = Arguments.createArray();
+        
         for(String r : redirects) {
             redirectList.pushString(r);
         }
