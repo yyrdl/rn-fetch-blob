@@ -255,7 +255,7 @@ function fetch(...args:any):Promise {
          while(i+1 < state.headers.length){
           let key = state.headers[i].toLowerCase();
           let value = state.headers[i+1];
-          if(key.indexof("cookie") > -1 && key.indexof("set") > -1){
+          if(key.indexOf("cookie") > -1 && key.indexOf("set") > -1){
             !headers["set-cookie"]  &&  (headers["set-cookie"] = []);
             headers["set-ccokie"].push(value);
           }else{
