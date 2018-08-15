@@ -54,9 +54,9 @@ public class RNFetchBlob extends ReactContextBaseJavaModule {
         super(reactContext);
 
         mClient = OkHttpClientProvider.getOkHttpClient();
-        ForwardingCookieHandler mCookieHandler = new ForwardingCookieHandler(reactContext);
-        CookieJarContainer mCookieJarContainer = (CookieJarContainer) mClient.cookieJar();
-        mCookieJarContainer.setCookieJar(new JavaNetCookieJar(mCookieHandler));
+        // ForwardingCookieHandler mCookieHandler = new ForwardingCookieHandler(reactContext);
+        // CookieJarContainer mCookieJarContainer = (CookieJarContainer) mClient.cookieJar();
+        // mCookieJarContainer.setCookieJar(new JavaNetCookieJar(mCookieHandler));
 
         RCTContext = reactContext;
         reactContext.addActivityEventListener(new ActivityEventListener() {
