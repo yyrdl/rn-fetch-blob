@@ -442,7 +442,7 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
             requestBody.clearRequestBody();
     }
 
-    private byte[] decompress(String encodingType, byte[] input) {
+    private byte[] decompress(String encodingType, byte[] input) throws Exception {
         if ("gzip" == encodingType) {
             byte[] b = null;
             try {
@@ -459,8 +459,8 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
                 baos.close();
                 gzip.close();
                 bis.close();
-            } catch (Exception ex) {
-
+            } catch (Exception e) {
+                throw e;
             }
 
             return b;
@@ -483,6 +483,7 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
                 infl.end();
                 bos.close();
             } catch (Exception e) {
+                throw e;
             }
             return bos.toByteArray();
         }
@@ -552,7 +553,7 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
                     }
                 }
             } catch (Exception e) {
-                callback.invoke(e.toString(), null);
+                callback.invoke("Fetch Failed:" + e.toString(), null);
             }
             break;
         case FileStorage:
@@ -572,8 +573,8 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
                 byte[] b = resp.body().bytes();
                 b = decompress(encodingType, b);
                 callback.invoke(null, RNFetchBlobConst.RNFB_RESPONSE_UTF8, new String(resp.body().bytes(), "UTF-8"));
-            } catch (IOException e) {
-                callback.invoke("RNFetchBlob failed to encode response data to UTF8 string.", null);
+            } catch (Exception e) {
+                callback.invoke("Fetch Failed:" + e.toString(), null);
             }
             break;
         }
