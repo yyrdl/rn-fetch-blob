@@ -678,7 +678,7 @@ public class RNFetchBlobReq extends BroadcastReceiver implements Runnable {
             return "gzip";
         }
         if (ctype.equalsIgnoreCase("deflate")) {
-            return "defalte";
+            return "deflate";
         }
         return "";
     }
